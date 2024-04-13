@@ -10,6 +10,9 @@ require('dotenv').config();
 const conn = require('./database/conn');
 conn();
 
+const routes = require('./routes/routes');
+routes(app);
+
 if(process.env.DB_SCHEMA){
   app.listen(8080, (err) => {
     if(err) {
