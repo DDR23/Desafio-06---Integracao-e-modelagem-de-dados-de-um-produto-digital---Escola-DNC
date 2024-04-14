@@ -22,6 +22,13 @@ function routes(app) {
   app.use('/client', require('./client/getOneClient'))
   app.use('/client', require('./client/putClient'))
   app.use('/client', require('./client/deleteClient'))
+  
+  //SALE
+  app.use('/sale', require('./sale/postSale'))
+  app.use('/sale', require('./sale/getSale'))
+  app.use('/sale', require('./sale/getOneSale'))
+  app.use('/sale', require('./sale/putSale'))
+  app.use('/sale', require('./sale/deleteSale'))
 }
 
 module.exports = routes;
