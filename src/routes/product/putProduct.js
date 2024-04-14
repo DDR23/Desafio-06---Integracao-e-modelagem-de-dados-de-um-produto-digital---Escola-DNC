@@ -6,7 +6,7 @@ router.put('/edit/:id', async (req, res) => {
   try {
     const product = await schemaProduct.findByPk(req.params.id);
     if(!product){
-      res.status(404).json({
+      return res.status(404).json({
         error: 'Product not found',
         message: `That product you're looking for doesn't exist in the database.`,
         code: 404
