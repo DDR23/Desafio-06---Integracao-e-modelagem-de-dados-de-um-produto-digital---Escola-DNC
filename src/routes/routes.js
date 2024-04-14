@@ -15,6 +15,13 @@ function routes(app) {
   app.use('/inventory', require('./inventory/getOneInventory'))
   app.use('/inventory', require('./inventory/putInventory'))
   app.use('/inventory', require('./inventory/deleteInventory'))
+  
+  //CLIENT
+  app.use('/client', require('./client/postClient'))
+  app.use('/client', require('./client/getClient'))
+  app.use('/client', require('./client/getOneClient'))
+  app.use('/client', require('./client/putClient'))
+  app.use('/client', require('./client/deleteClient'))
 }
 
 module.exports = routes;

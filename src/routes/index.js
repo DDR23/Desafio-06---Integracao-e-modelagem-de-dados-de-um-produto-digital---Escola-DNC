@@ -8,6 +8,7 @@ router.get('', async (req, res) => {
       <ul>
         <li><a href="/product">/product</a></li>
         <li><a href="/inventory">/inventory</a></li>
+        <li><a href="/client">/client</a></li>
       </ul>
     `);
     
