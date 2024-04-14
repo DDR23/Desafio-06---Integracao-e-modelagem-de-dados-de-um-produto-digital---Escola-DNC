@@ -7,6 +7,7 @@ router.get('', async (req, res) => {
       <p>Rotas disponíveis:</p>
       <ul>
         <li><a href="/product">/product</a></li>
+        <li><a href="/inventory">/inventory</a></li>
       </ul>
     `);
     
