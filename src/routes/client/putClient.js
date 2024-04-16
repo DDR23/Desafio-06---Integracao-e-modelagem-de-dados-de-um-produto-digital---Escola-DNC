@@ -16,7 +16,6 @@ router.put('/edit/:id', async (req, res) => {
     client.CLIENT_PASSWORD = req.body.CLIENT_PASSWORD
     await client.save();
     res.status(200).json(client);
-    
   } catch (error) {
     const clientNotUnique = error.parent.sqlState
     if(clientNotUnique){

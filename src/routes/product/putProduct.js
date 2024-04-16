@@ -17,7 +17,6 @@ router.put('/edit/:id', async (req, res) => {
     product.PRODUCT_PRICE = req.body.PRODUCT_PRICE
     await product.save();
     res.status(200).json(product);
-    
   } catch (error) {
     const productNotUnique = error.parent.sqlState
     if(productNotUnique){

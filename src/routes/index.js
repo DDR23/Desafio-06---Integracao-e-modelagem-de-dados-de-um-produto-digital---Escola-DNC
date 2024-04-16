@@ -12,7 +12,6 @@ router.get('', async (req, res) => {
         <li><a href="/sale">/sale</a></li>
       </ul>
     `);
-    
   } catch (error) {
     res.status(500).send('Estamos enfrentando algum problema');
   }
