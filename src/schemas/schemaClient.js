@@ -1,6 +1,8 @@
+//CONFIG E IMPORTAÇÕES
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database/sequilize');
+const sequelize = require('../database/sequelize');
 
+//ESSE SCHEMA CRIA AUTOMATICAMENTE A TABELA NO BANCO DE DADOS
 const Client = sequelize.define('TB_CLIENT', {
   CLIENT_ID: {
     type: DataTypes.INTEGER,
