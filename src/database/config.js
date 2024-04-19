@@ -1,3 +1,4 @@
+//ATRIBUI VALOR AS VARIÁVEIS DE ACORDO COM A EXISTENCIA DAS VARIAVEIS DE AMBIENTE
 module.exports = {
   DB_USER: process.env.DB_USER || process.env.DB_LOCAL_USER,
   DB_PASSWORD: process.env.DB_PASSWORD || process.env.DB_LOCAL_PASSWORD,

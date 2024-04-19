@@ -1,6 +1,8 @@
+//CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
 const express = require('express');
 const router = express.Router();
 
+//REQUISIÇÃO HTTP
 router.get('', async (req, res) => {
   try {
     res.status(200).send(`
