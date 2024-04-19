@@ -1,6 +1,8 @@
+//CONFIG E IMPORTAÇÕES
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database/sequilize');
+const sequelize = require('../database/sequelize');
 
+//ESSE SCHEMA CRIA AUTOMATICAMENTE A TABELA NO BANCO DE DADOS
 const Product = sequelize.define('TB_PRODUCT', {
   PRODUCT_ID: {
     type: DataTypes.INTEGER,
@@ -13,8 +15,8 @@ const Product = sequelize.define('TB_PRODUCT', {
     unique: 'PRODUCT_NAME_UNIQUE'
   },
   PRODUCT_DESCRIPTION: {
-    type: DataTypes.STRING(100),
-    allowNull: false
+    type: DataTypes.STRING(200),
+    allowNull: true
   },
   PRODUCT_PRICE: {
     type: DataTypes.DECIMAL(6,2),

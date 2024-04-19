@@ -1,7 +1,9 @@
+//CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
 const express = require('express');
 const router = express.Router();
 const schemaProduct = require('../../schemas/schemaProduct');
 
+//REQUISIÇÃO HTTP
 router.post('/create', async (req, res) => {
   try {
     const { PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_PRICE } = req.body;

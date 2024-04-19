@@ -1,7 +1,9 @@
+//CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
 const express = require('express');
 const router = express.Router();
 const schemaProduct = require('../../schemas/schemaProduct');
 
+//REQUISIÇÃO HTTP
 router.delete('/delete/:id', async (req, res) => {
   try {
     const product = await schemaProduct.findByPk(req.params.id);
