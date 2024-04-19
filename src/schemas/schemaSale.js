@@ -1,15 +1,17 @@
+//CONFIG E IMPORTAÇÕES
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database/sequilize');
+const sequelize = require('../database/sequelize');
 const Client = require('./schemaClient');
 
+//ESSE SCHEMA CRIA AUTOMATICAMENTE A TABELA NO BANCO DE DADOS
 const Sale = sequelize.define('TB_SALE', {
   SALE_ID: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  SALE_DATE: {
-    type: DataTypes.DATE,
+  SALE_PRICE: {
+    type: DataTypes.DECIMAL(8,2),
     allowNull: false
   },
   FK_CLIENT_ID: {

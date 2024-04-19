@@ -1,8 +1,10 @@
+//CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
 const express = require('express');
 const router = express.Router();
 const schemaSale = require('../../schemas/schemaSale');
 const schemaClient = require('../../schemas/schemaClient');
 
+//REQUISIÇÃO HTTP
 router.put('/edit/:id', async (req, res) => {
   try {
     const sale = await schemaSale.findByPk(req.params.id);
