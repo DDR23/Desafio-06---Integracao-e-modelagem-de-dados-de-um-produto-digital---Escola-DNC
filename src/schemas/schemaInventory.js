@@ -1,7 +1,9 @@
+//CONFIG E IMPORTAÇÕES
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database/sequilize');
+const sequelize = require('../database/sequelize');
 const Product = require('./schemaProduct');
 
+//ESSE SCHEMA CRIA AUTOMATICAMENTE A TABELA NO BANCO DE DADOS
 const Inventory = sequelize.define('TB_INVENTORY', {
   INVENTORY_ID: {
     type: DataTypes.INTEGER,
@@ -10,7 +12,7 @@ const Inventory = sequelize.define('TB_INVENTORY', {
   },
   INVENTORY_QUANTITY: {
     type: DataTypes.INTEGER,
-    allowNull: true
+    allowNull: false
   },
   FK_PRODUCT_ID: {
     type: DataTypes.INTEGER,

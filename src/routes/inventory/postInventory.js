@@ -1,8 +1,10 @@
+//CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
 const express = require('express');
 const router = express.Router();
 const schemaInventory = require('../../schemas/schemaInventory');
 const schemaProduct = require('../../schemas/schemaProduct');
 
+//REQUISIÇÃO HTTP
 router.post('/create', async (req, res) => {
   try {
     const { INVENTORY_QUANTITY, FK_PRODUCT_ID } = req.body;
@@ -14,8 +16,14 @@ router.post('/create', async (req, res) => {
         code: 400
       });
     }
-    const newInventory = await schemaInventory.create({ INVENTORY_QUANTITY, FK_PRODUCT_ID });
-    res.status(201).json(newInventory);
+    let inventory = await schemaInventory.findOne({ where: { FK_PRODUCT_ID } });
+    if (inventory) {
+      inventory.INVENTORY_QUANTITY += +INVENTORY_QUANTITY;
+      await inventory.save();
+    } else {
+      inventory = await schemaInventory.create({ INVENTORY_QUANTITY: +INVENTORY_QUANTITY, FK_PRODUCT_ID });
+    }
+    res.status(201).json(inventory);
   } catch (error) {
     console.log(error)
     res.status(500).json({

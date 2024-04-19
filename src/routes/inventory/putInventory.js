@@ -1,8 +1,10 @@
+//CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
 const express = require('express');
 const router = express.Router();
 const schemaInventory = require('../../schemas/schemaInventory');
 const schemaProduct = require('../../schemas/schemaProduct');
 
+//REQUISIÇÃO HTTP
 router.put('/edit/:id', async (req, res) => {
   try {
     const inventory = await schemaInventory.findByPk(req.params.id);
@@ -21,8 +23,15 @@ router.put('/edit/:id', async (req, res) => {
         code: 400
       });
     }
-    inventory.INVENTORY_QUANTITY = req.body.INVENTORY_QUANTITY
-    inventory.FK_PRODUCT_ID = req.body.FK_PRODUCT_ID
+    const quantitySold = req.body.INVENTORY_QUANTITY;
+    if (inventory.INVENTORY_QUANTITY < quantitySold) {
+      return res.status(400).json({
+        error: 'Bad Request',
+        message: 'Not enough quantity in inventory.',
+        code: 400
+      });
+    }
+    inventory.INVENTORY_QUANTITY -= quantitySold
     await inventory.save();
     res.status(200).json(inventory);
   } catch (error) {

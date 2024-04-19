@@ -1,7 +1,9 @@
+//CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
 const express = require('express');
 const router = express.Router();
 const schemaInventory = require('../../schemas/schemaInventory');
 
+//REQUISIÇÃO HTTP
 router.get('/', async (req, res) => {
   try {
     const inventory = await schemaInventory.findAll();
