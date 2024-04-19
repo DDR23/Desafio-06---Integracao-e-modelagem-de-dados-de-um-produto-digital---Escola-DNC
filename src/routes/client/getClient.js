@@ -1,7 +1,9 @@
+//CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
 const express = require('express');
 const router = express.Router();
 const schemaClient = require('../../schemas/schemaClient');
 
+//REQUISIÇÃO HTTP
 router.get('/', async (req, res) => {
   try {
     const client = await schemaClient.findAll();
