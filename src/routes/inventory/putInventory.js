@@ -2,11 +2,14 @@
 const express = require('express');
 const router = express.Router();
 const schemaInventory = require('../../schemas/schemaInventory');
-const schemaProduct = require('../../schemas/schemaProduct');
 
 //REQUISIÇÃO HTTP
 router.put('/edit/:id', async (req, res) => {
+
+  //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
+
+    //VERIFICA SE O INVENTARIO EXISTE
     const inventory = await schemaInventory.findByPk(req.params.id);
     if(!inventory){
       res.status(404).json({
@@ -15,25 +18,17 @@ router.put('/edit/:id', async (req, res) => {
         code: 404
       });
     }
-    const product = await schemaProduct.findByPk(req.body.FK_PRODUCT_ID);
-    if (!product) {
-      return res.status(400).json({
-        error: 'Bad Request',
-        message: 'The product does not exist.',
-        code: 400
-      });
-    }
-    const quantitySold = req.body.INVENTORY_QUANTITY;
-    if (inventory.INVENTORY_QUANTITY < quantitySold) {
-      return res.status(400).json({
-        error: 'Bad Request',
-        message: 'Not enough quantity in inventory.',
-        code: 400
-      });
-    }
-    inventory.INVENTORY_QUANTITY -= quantitySold
+
+    //SALVA O NOVO VALOR
+    inventory.INVENTORY_QUANTITY = parseInt(req.body.INVENTORY_QUANTITY);
+
+    //EXECUTA O PUT
     await inventory.save();
+
+    //RETORNA O RESULTADO
     res.status(200).json(inventory);
+
+  //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
     res.status(500).json({
       error: 'Internal server error',

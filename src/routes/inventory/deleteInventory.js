@@ -5,7 +5,11 @@ const schemaInventory = require('../../schemas/schemaInventory');
 
 //REQUISIÇÃO HTTP
 router.delete('/delete/:id', async (req, res) => {
+
+  //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
+
+    //VERIFICA SE O INVENTARIO EXISTE
     const inventory = await schemaInventory.findByPk(req.params.id);
     if (!inventory) {
       return res.status(404).json({
@@ -14,11 +18,17 @@ router.delete('/delete/:id', async (req, res) => {
         code: 404
       });
     }
+
+    //EXECUTA O DELETE
     await inventory.destroy();
+
+    //RETORNA O RESULTADO
     res.status(200).json({
       message: 'Inventory deleted successfully',
       code: 200
     });
+
+  //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
     res.status(500).json({
       error: 'Internal server error',
