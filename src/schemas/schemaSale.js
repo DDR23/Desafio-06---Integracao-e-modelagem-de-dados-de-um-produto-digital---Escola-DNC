@@ -12,7 +12,8 @@ const Sale = sequelize.define('TB_SALE', {
   },
   SALE_PRICE: {
     type: DataTypes.DECIMAL(8,2),
-    allowNull: false
+    allowNull: false,
+    defaultValue: 0
   },
   FK_CLIENT_ID: {
     type: DataTypes.INTEGER,
