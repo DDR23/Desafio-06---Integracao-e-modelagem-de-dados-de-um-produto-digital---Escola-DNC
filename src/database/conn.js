@@ -1,5 +1,5 @@
 //CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
-const mysql = require('mysql2')
+const mysql = require('mysql2');
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_SCHEMA } = require('./config');
 
 //CRIAR UMA CONEXÃO COM MYSQL
@@ -19,6 +19,6 @@ async function conn(){
   } catch (error) {
     console.log(`Erro: ${error}`)
   }
-}
+};
 
 module.exports = conn;

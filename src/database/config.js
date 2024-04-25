@@ -5,4 +5,4 @@ module.exports = {
   DB_HOST: process.env.DB_HOST || process.env.DB_LOCAL_HOST,
   DB_PORT: process.env.DB_PORT || process.env.DB_LOCAL_PORT,
   DB_SCHEMA: process.env.DB_SCHEMA || process.env.DB_LOCAL_SCHEMA,
-}
+};
