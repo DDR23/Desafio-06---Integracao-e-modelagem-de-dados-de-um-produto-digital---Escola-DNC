@@ -21,6 +21,11 @@ const Product = sequelize.define('TB_PRODUCT', {
   PRODUCT_PRICE: {
     type: DataTypes.DECIMAL(6,2),
     allowNull: false
+  },
+  PRODUCT_DELETED: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
   }
 },{
   tableName: 'TB_PRODUCT',
