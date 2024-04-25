@@ -34,5 +34,5 @@ if(process.env.DB_SCHEMA){
     } else {
       console.log('Servidor de teste no ar')
     }
-  })
+  });
 }
