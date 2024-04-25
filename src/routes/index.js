@@ -5,12 +5,14 @@ const router = express.Router();
 //REQUISIÇÃO HTTP
 router.get('', async (req, res) => {
   try {
+    
+    //LISTAGEM DE ROTAS DISPONIVEIS
     res.status(200).send(`
       <p>Rotas disponíveis:</p>
       <ul>
+        <li><a href="/client">/client</a></li>
         <li><a href="/product">/product</a></li>
         <li><a href="/inventory">/inventory</a></li>
-        <li><a href="/client">/client</a></li>
         <li><a href="/sale">/sale</a></li>
         <li><a href="/order">/order</a></li>
       </ul>
