@@ -10,13 +10,18 @@ const Client = sequelize.define('TB_CLIENT', {
     autoIncrement: true
   },
   CLIENT_USERNAME: {
-    type: DataTypes.STRING(45),
+    type: DataTypes.STRING(64),
     allowNull: false,
     unique: 'COL_USERNAME_UNIQUE'
   },
   CLIENT_PASSWORD: {
     type: DataTypes.STRING(64),
     allowNull: false
+  },
+  CLIENT_DELETED: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
   }
 },{
   tableName: 'TB_CLIENT',
