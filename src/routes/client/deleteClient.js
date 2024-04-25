@@ -5,7 +5,11 @@ const schemaClient = require('../../schemas/schemaClient');
 
 //REQUISIÇÃO HTTP
 router.delete('/delete/:id', async (req, res) => {
+
+  //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
+    
+    //VERIFICA SE O CLIENTE EXISTE
     const client = await schemaClient.findByPk(req.params.id);
     if (!client) {
       return res.status(404).json({
@@ -13,12 +17,18 @@ router.delete('/delete/:id', async (req, res) => {
         message: `That client you're looking for doesn't exist in the database.`,
         code: 404
       });
-    }
-    await client.destroy();
+    };
+
+    //EXECUTA O SOFT DELETE
+    await client.update({ CLIENT_DELETED: true });
+
+    //RETORNA O RESULTADO
     res.status(200).json({
       message: 'CLient deleted successfully',
       code: 200
     });
+
+  //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
     res.status(500).json({
       error: 'Internal server error',
