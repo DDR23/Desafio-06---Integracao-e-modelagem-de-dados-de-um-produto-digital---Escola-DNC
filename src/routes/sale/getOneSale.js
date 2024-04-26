@@ -5,7 +5,11 @@ const schemaSale = require('../../schemas/schemaSale');
 
 //REQUISIÇÃO HTTP
 router.get('/:id', async (req, res) => {
+
+  //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
+
+    //VERIFICA SE A VENDA EXISTE
     const sale = await schemaSale.findByPk(req.params.id);
     if(!sale){
       return res.status(404).json({
@@ -14,7 +18,11 @@ router.get('/:id', async (req, res) => {
         code: 404
       });
     }
+
+    //RETORNA O RESULTADO
     res.status(200).json(sale);
+
+  //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
     res.status(500).json({
       error: 'Internal server error',
