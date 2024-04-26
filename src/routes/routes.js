@@ -30,6 +30,13 @@ function routes(app) {
   app.use('/sale', require('./sale/getOneSale'));
   app.use('/sale', require('./sale/putSale'));
   app.use('/sale', require('./sale/deleteSale'));
+
+  //ORDER
+  app.use('/order', require('./order/postOrder'));
+  app.use('/order', require('./order/getOrder'));
+  app.use('/order', require('./order/getOneOrder'));
+  app.use('/order', require('./order/putOrder'));
+  app.use('/order', require('./order/deleteOrder'));
 };
 
 module.exports = routes;
