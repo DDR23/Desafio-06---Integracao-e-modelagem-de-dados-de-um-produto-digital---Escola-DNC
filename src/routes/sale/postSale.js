@@ -6,8 +6,14 @@ const schemaClient = require('../../schemas/schemaClient');
 
 //REQUISIÇÃO HTTP
 router.post('/create', async (req, res) => {
+
+  //EXECUTA TODO ESSE BLOCO AO BATER NA ROTA
   try {
-    const { SALE_PRICE, FK_CLIENT_ID } = req.body;
+
+    //GUARDA O CONTEÚDO QUE VEM DO BODY
+    const { FK_CLIENT_ID } = req.body;
+
+    //VERIFICA SE O CLIENTE EXISTE
     const client = await schemaClient.findByPk(FK_CLIENT_ID);
     if (!client) {
       return res.status(400).json({
@@ -16,10 +22,24 @@ router.post('/create', async (req, res) => {
         code: 400
       });
     }
-    const newSale = await schemaSale.create({ SALE_PRICE, FK_CLIENT_ID });
+
+    //VERIFICA SE O CLIENTE ESTA MORCADO COMO DELETADO, CASO ESTEJA RETORNA ERRO
+    if(client.CLIENT_DELETED) {
+      return res.status(400).json({
+        error: 'Bad Request',
+        message: 'This customer has been subjected to a soft deletion. Please undo the deletion in order to register a sale for them.',
+        code: 400
+      });
+    }
+
+    //EXECUTA O POST
+    const newSale = await schemaSale.create({ FK_CLIENT_ID });
+
+    //RETORNA O RESULTADO
     res.status(201).json(newSale);
+
+  //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    console.log(error)
     res.status(500).json({
       error: 'Internal server error',
       message: 'This sale could not be created due to an internal server error. Please try again later.',
