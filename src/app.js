@@ -10,6 +10,12 @@ app.use(cors());
 //CONFIG. PADRÃO DO DOTENV
 require('dotenv').config();
 
+//CONFIG. PADRÃO DO FAVICON
+const path = require('path');
+const favicon = require('serve-favicon');
+app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(favicon(path.join(__dirname, '..','public', 'favicon.ico')));
+
 //EXECUTA A FUNÇÃO DE CONEXÃO COM O BANCO DE DADOS
 const conn = require('./database/conn');
 conn();
@@ -30,9 +36,9 @@ if(process.env.DB_SCHEMA){
 } else {
   app.listen(8080, (err) => {
     if (err) {
-      console.log(`ERRO ao iniciar o servidor: ${err}`)
+      console.log(`ERRO ao iniciar o servidor: ${err}`);
     } else {
-      console.log('Servidor de teste no ar')
+      console.log('Servidor de teste no ar');
     }
   });
 }

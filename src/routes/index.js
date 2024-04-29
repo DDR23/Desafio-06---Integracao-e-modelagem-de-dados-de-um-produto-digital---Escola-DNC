@@ -1,22 +1,18 @@
 //CONFIG. PADRÃO DE ROTEAMENTO E IMPORTAÇÕES
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 //REQUISIÇÃO HTTP
 router.get('', async (req, res) => {
+
+  //EXECUTA ESSE BLOCO AO BATER NA ROTA
   try {
     
-    //LISTAGEM DE ROTAS DISPONIVEIS
-    res.status(200).send(`
-      <p>Rotas disponíveis:</p>
-      <ul>
-        <li><a href="/client">/client</a></li>
-        <li><a href="/product">/product</a></li>
-        <li><a href="/inventory">/inventory</a></li>
-        <li><a href="/sale">/sale</a></li>
-        <li><a href="/order">/order</a></li>
-      </ul>
-    `);
+    //RETORNA O CONTEUDO DO INDEX.HTML
+    res.sendFile(path.join(__dirname, '..','..', 'public', 'index.html'));
+
+  //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
     res.status(500).send('Estamos enfrentando algum problema');
   }
