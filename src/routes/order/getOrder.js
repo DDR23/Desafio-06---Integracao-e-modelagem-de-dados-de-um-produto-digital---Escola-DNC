@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
   } catch (error) {
     res.status(500).json({
       error: 'Internal server error',
-      message: `The order list could not be retrieved due to an internal server error. Please try again later.`,
+      message: `The order list could not be retrieved due to an internal server error. Please reload the page or try again later.`,
       code: 500
     });
   }
