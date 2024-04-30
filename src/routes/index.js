@@ -14,7 +14,7 @@ router.get('', async (req, res) => {
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    res.status(500).send('Estamos enfrentando algum problema');
+    return res.status(500).sendFile(path.join(__dirname, '..', '..', 'public', 'error.html'));
   }
 });
 
