@@ -55,6 +55,7 @@ router.delete('/delete/:id', async (req, res) => {
     //DEVOLVE O PRODUTO PARA O INVENTARIO E ATUALIZA O 'INVENTORY_QUANTITY'
     const updatedQuantity = inventory.INVENTORY_QUANTITY + order.ORDER_QUANTITY;
     await schemaInventory.update({ INVENTORY_QUANTITY: updatedQuantity }, { where: { FK_PRODUCT_ID: order.FK_PRODUCT_ID } });
+    await schemaProduct.update({ PRODUCT_DELETED: false }, { where: { PRODUCT_ID: order.FK_PRODUCT_ID } })
 
     //RETIRA O VALOR DOS PRODUTOS DA ORDEM E ATUALIZA O 'SALE_PRICE' 
     const salePrice = order.ORDER_QUANTITY * product.PRODUCT_PRICE;
