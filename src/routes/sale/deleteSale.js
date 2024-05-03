@@ -4,6 +4,7 @@ const router = express.Router();
 const schemaSale = require('../../schemas/schemaSale');
 const schemaOrder = require('../../schemas/schemaOrder');
 const schemaInventory = require('../../schemas/schemaInventory');
+const schemaProduct = require('../../schemas/schemaProduct');
 
 //REQUISIÇÃO HTTP
 router.delete('/delete/:id', async (req, res) => {
@@ -33,6 +34,7 @@ router.delete('/delete/:id', async (req, res) => {
 
         //ATUALIZA A QUANTIDADE DO PRODUTO NO INVENTARIO
         await schemaInventory.update({ INVENTORY_QUANTITY: updatedQuantity }, { where: { FK_PRODUCT_ID: order.FK_PRODUCT_ID } });
+        await schemaProduct.update({ PRODUCT_DELETED: false }, { where: { PRODUCT_ID: order.FK_PRODUCT_ID } });
       }
     }
 
