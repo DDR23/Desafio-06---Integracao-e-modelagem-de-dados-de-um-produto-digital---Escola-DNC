@@ -20,8 +20,8 @@ router.delete('/delete/:id', async (req, res) => {
       });
     }
 
-    //APAGA TODOS OS REGISTRO DESSE PRODUTO NA TABELA INVENTARIO, CASO EXISTA
-    await schemaInventory.destroy({ where: { FK_PRODUCT_ID: req.params.id } });
+    //ZERA Q QUANTIDADE DESSE PRODUTO NO ESTOQUE
+    await schemaInventory.update({ INVENTORY_QUANTITY: 0 }, { where: { FK_PRODUCT_ID: req.params.id } });
 
     //EXECUTA O SOFT DELETE
     await product.update({ PRODUCT_DELETED: true });
