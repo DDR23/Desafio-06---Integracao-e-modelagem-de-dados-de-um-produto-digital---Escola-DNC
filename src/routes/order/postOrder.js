@@ -44,9 +44,25 @@ router.post('/create', async (req, res) => {
       });
     }
 
-    //VERIFICA SE O PRODUTO EXISTE E SE TEM A QUANTIDADE NECESSÁRIA DISPONIVEL NO INVENTARIO
+    //VERIFICA SE O PRODUTO ESTA MORCADO COMO DELETADO, CASO ESTEJA RETORNA ERRO
+    if(product.PRODUCT_DELETED) {
+      return res.status(400).json({
+        error: 'Bad Request',
+        message: 'This product has been subject to soft deletion. Undo the deletion to register an order with it.',
+        code: 400
+      });
+    }
+
+    //VERIFICA SE O PRODUTO ESTÁ DISPONÍVEL E SE TEM A QUANTIDADE NECESSÁRIA DISPONIVEL NO INVENTARIO
     const inventory = await schemaInventory.findOne({ where: { FK_PRODUCT_ID } });
-    if(!inventory || inventory.INVENTORY_QUANTITY < ORDER_QUANTITY) {
+    if(!inventory || inventory.INVENTORY_QUANTITY === 0) {
+      return res.status(400).json({
+        error: 'Bad Request',
+        message: 'This product is currently unavailable.',
+        code: 400
+      });
+    }
+    if(inventory.INVENTORY_QUANTITY < ORDER_QUANTITY) {
       return res.status(400).json({
         error: 'Bad Request',
         message: 'The product quantity is not sufficient.',
@@ -57,7 +73,7 @@ router.post('/create', async (req, res) => {
     //VERIFICA SE UMA ORDEM COM O PRODUTO E A VENDA JÁ EXISTE, CASO EXISTA ADICIONA A QUANTIDADE, CASO NAO EXISTA CRIA UMA ORDEM
     let order = await schemaOrder.findOne({ where: { FK_SALE_ID, FK_PRODUCT_ID } });
     if(order) {
-      const newQuantity = order.ORDER_QUANTITY + ORDER_QUANTITY;
+      const newQuantity = order.ORDER_QUANTITY += + ORDER_QUANTITY;
       await schemaOrder.update({ ORDER_QUANTITY: newQuantity }, { where: { FK_SALE_ID, FK_PRODUCT_ID } });
       order = await schemaOrder.findOne({ where: { FK_SALE_ID, FK_PRODUCT_ID } });
     } else {
