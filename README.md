@@ -90,7 +90,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
 -- -----------------------------------------------------
 -- Table `desafio06-DNC`.`TB_PRODUCT`
 -- -----------------------------------------------------
@@ -107,7 +106,6 @@ CREATE TABLE IF NOT EXISTS `desafio06-DNC`.`TB_PRODUCT` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
 
 -- -----------------------------------------------------
 -- Table `desafio06-DNC`.`TB_INVENTORY`
@@ -127,7 +125,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
 -- -----------------------------------------------------
 -- Table `desafio06-DNC`.`TB_SALE`
 -- -----------------------------------------------------
@@ -145,7 +142,6 @@ CREATE TABLE IF NOT EXISTS `desafio06-DNC`.`TB_SALE` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
 
 -- -----------------------------------------------------
 -- Table `desafio06-DNC`.`TB_ORDER`
@@ -170,7 +166,6 @@ CREATE TABLE IF NOT EXISTS `desafio06-DNC`.`TB_ORDER` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
