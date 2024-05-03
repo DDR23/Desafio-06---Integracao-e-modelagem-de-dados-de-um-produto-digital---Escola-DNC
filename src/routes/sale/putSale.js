@@ -47,7 +47,7 @@ router.put('/edit/:id', async (req, res) => {
           code: 400
         });
       }
-      //SALA O NOVO VALOR
+      //SALVA O NOVO VALOR
       sale.FK_CLIENT_ID = saleClient;
     }
 
