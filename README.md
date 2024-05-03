@@ -1,23 +1,27 @@
 ## IMPORTANTE
 Esse repositório foi criado e desenvolvido para o Backend do desafio 06 da escola DNC.
 
-Nesse README.dm é possivel encontrar informações sobre:
-- Etapas de desenvolvimento do Desafio
-- Tecnologias usadas
-- Banco de dados
-- Instalações
-- Funcionalidades
-- Exemplos de uso + link da colletion no postman
+Nesse `README.dm` é possivel encontrar informações sobre:
+
+- [Etapas de desenvolvimento do desafio](#desenvolvimento)
+- [Tecnologias usadas](#tecnologias)
+- [Banco de dados](#banco)
+- [Instalações](#instalacoes)
+- [Funcionalidades](#funcionalidades)
+- [Colletion no postman](#collection)
+- [Exemplos de uso](#exemplos)
 
 #### URL da API: https://api-desafio06escoladnc.vercel.app/
+Obs: Essa api foi hospedada na Vercel, normalmente a vercel desliga o servidor devido inatividade, é possivel que ao entrar no link ou bater em alguma rota um erro de servidor seja retornado, caso isso aconteca, é preciso recarregar a pagina até que a vercel ligue o servidor novamente.
 
 &nbsp;
 
 ---
+<a id="desenvolvimento"></a>
 
 # Desafio-06---Integracao-e-modelagem-de-dados-de-um-produto-digital---Escola-DNC
 
-🎯 Etapas de Desenvolvimento
+🎯Etapas de Desenvolvimento
 
 ### ETAPA-01 - Defina as entidades envolvidas no sistema
 - Identifique os objetos e informações que serão gerenciados pelo sistema. No caso do sistema de gerenciamento de vendas online as especificações indicam que terá que criar as entidades: `produtos`, `clientes`, `vendas`, `pedidos` e `estoque`.
@@ -43,6 +47,7 @@ Utilize um software para testar a API, através do Insomnia. Envie as requisiç�
 &nbsp;
 
 &nbsp;
+<a id="tecnologias"></a>
 
 ## Tecnologias usadas
 - express.js
@@ -52,6 +57,7 @@ Utilize um software para testar a API, através do Insomnia. Envie as requisiç�
 - Railway
 
 &nbsp;
+<a id="banco"></a>
 
 ## Banco de dados
 ### Script SQL
@@ -176,6 +182,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 ![imgBB](https://i.ibb.co/HqpZCbs/diagram-EER.png)
 
 &nbsp;
+<a id="instalacoes"></a>
 
 ## Instalações
 
@@ -226,51 +233,64 @@ DB_LOCAL_SCHEMA=desafio06-dnc
 ```
 
 &nbsp;
+<a id="funcionalidades"></a>
 
 ## Funcionalidades
 
-ROTA CLIENT
-- Cadastra novos clientes, com username unico.
-- Visualiza todos ou um cliente.
-- Edita os registros, permite edição de campos separadamente, não permite que o novo username seja igual a algum ja registrado e retira o soft delete.
-- Aplica um soft delete no cliente mantendo as referencias à este cliente em outras tabelas.
+[/CLIENT](#client)
+- `/client/create` Cadastra um novo cliente, com username unico.
+- `/client` ou `/client/:id` Visualiza todos ou um cliente.
+- `/client/edit/:id` Edita os registros e retira o soft delete. Permite edição de campos separadamente, não permite que o novo username seja igual a algum ja registrado.
+- `/client/delete/:id` Aplica um soft delete no cliente mantendo as referencias à este cliente em outras tabelas.
 
-ROTA PRODUCT
-- Cadastra novos produtos, com nome unico
-- Visualiza todos ou um produto
-- Edita os registros, permite edição de campos separadamente, não permite que o novo nome seja igual a algum ja registrado e retira o soft delete.
-- Aplica um soft delete no produto, não altera a tabela order, porem remove a referencia desse produto na tabela inventory.
+[/PRODUCT](#product)
+- `/product/create`Cadastra um novo produto, com nome unico
+- `/product` ou `/product/:id` Visualiza todos ou um produto
+- `/product/edit/:id` Edita os registros e retira o soft delete. Permite edição de campos separadamente, não permite que o novo nome seja igual a algum ja registrado.
+- `/product/delete/:id`Aplica um soft delete no produto, não altera a tabela order, porem zera quantidade desse produto na tabela inventory.
 
-ROTA INVENTORY
-- Cadastra a quantidade de um produto existente, caso o produto já exista no inventario adiciona a quantidade ao inventario existente.
-- Visualiza todos ou um inventario.
-- Edita apenas a quantidade do produto.
-- Deleta um inventario.
+[/INVENTORY](#inventory)
+- `/inventory/create` Cadastra a quantidade de um produto existente, caso o produto já exista no inventario adiciona a quantidade ao inventario existente.
+- `/inventory` ou `/inventory/:id` Visualiza todos ou um inventario.
+- `/inventory/edit/:id` Edita apenas a quantidade do produto. Caso o produto esteja marcado com soft delete não permite alteração até que o soft delete seja removido.
+- `/inventory/delete/:id` zera o inventario.
 
-ROTA SALE
-- Cadastra uma nova venda indicando apenas o cliente, não permite criação de venda para clientes marcados com soft delete, por padrão o valor da venda é zero e nenhum valor é passado na criação.
-- Visualizar todos ou uma venda.
-- Edita o valor da venda e o cliente responsavel, permite edição de campos separadamente
-- Deleta uma venda, ao deletar uma venda deleta todas as ordens que fazem referencia à ela e estorna para a tabela inventory a quantidade dos produtos definidos em todas as ordens.
+[/SALE](#sale)
+- `/sale/create` Cadastra uma nova venda, não permite criação de venda para clientes marcados com soft delete, por padrão o valor da venda é zero e nenhum valor é passado na criação.
+- `/sale` ou `/sale/:id` Visualiza todas ou uma venda.
+- `/sale/edit/:id` Edita o valor da venda e o cliente responsavel. Permite edição de campos separadamente.
+- `/sale/delete/:id` Deleta uma venda, ao deletar uma venda todas as ordens que fazem referencia à ela são apagadas, estorna para a tabela inventory a quantidade dos produtos definidos em todas as ordens. Caso o produto esteja marcado com soft delete, retira o soft delete.
 
-ROTA ORDER
-- cadastra uma nova ordem, caso a ordem com o produto e o cliente exista, adiciona à ordem existente, ao criar uma ordem a tabela sale é atualizada com o preço vezes a quantidade do produto, não é permitido criar uma ordem com quantidade zero.
-- Visualiza todas ou uma ordem.
-- Edita apenas a quantidade, atualiza a tabela inventory adicionando ou subtraindo a quantidade e atualiza o valor final na tabela sale.
-- Deleta uma ordem, estorna a quantidade do produto para tabela inventory e atualiza o valor final na tabela sale.
+[/ORDER](#order)
+- `/order/create` cadastra uma nova ordem, caso a ordem com o produto e o cliente exista, adiciona à ordem existente, ao criar uma ordem a tabela sale é atualizada com o preço vezes a quantidade do produto, não é permitido criar uma ordem com quantidade zero.
+- `/order` ou `/order/:id` Visualiza todas ou uma ordem.
+- `/order/edit/:id` Edita apenas a quantidade, atualiza a tabela inventory adicionando ou subtraindo a quantidade e atualiza o valor final na tabela sale.
+- `/order/delete/:id` Deleta uma ordem, estorna a quantidade do produto para tabela inventory e atualiza o valor final na tabela sale. Caso o produto esteja marcado com soft delete, retira o soft delete.
+
+&nbsp;
+<a id="collection"></a>
+
+## Collection no postman
 
 &nbsp;
 
-## Exemplos de uso:
-&nbsp;
-
-Link da collection para postman
+Link da coleção no postman
 ```http
-https://www.postman.com/cryosat-explorer-99357718/workspace/escola-dnc/collection/30895958-276761f6-7116-4ec3-a8bf-2342f4f627f6?action=share&creator=30895958&active-environment=30895958-28b0b03e-551f-4191-a52d-affd65c1e244 
+https://www.postman.com/cryosat-explorer-99357718/workspace/escola-dnc/collection/30895958-276761f6-7116-4ec3-a8bf-2342f4f627f6?action=share&creator=30895958&active-environment=30895958-28b0b03e-551f-4191-a52d-affd65c1e244
 ```
-Obs: Pode ser preciso definir o valor da variavel `{{URLbase}}`
+Obs: Pode ser preciso definir o valor da variavel `{{URLbase}}` como:
+```http
+https://api-desafio06escoladnc.vercel.app
+```
 
 &nbsp;
+<a id="exemplos"></a>
+
+## Exemplos de uso
+
+&nbsp;
+<a id='client'></a>
+
 ### /client
 
 &nbsp;
@@ -301,7 +321,7 @@ https://api-desafio06escoladnc.vercel.app/client
 https://api-desafio06escoladnc.vercel.app/client/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
 
@@ -311,7 +331,7 @@ Obs: lembre-se se subistituir o ":id" por um id valido
 https://api-desafio06escoladnc.vercel.app/client/edit/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
 É necessário passar esse objeto no body de requisição
@@ -342,10 +362,11 @@ exemplo:
 https://api-desafio06escoladnc.vercel.app/client/delete/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 
 &nbsp;
+<a id='product'></a>
 
 ### /product
 &nbsp;
@@ -378,7 +399,7 @@ https://api-desafio06escoladnc.vercel.app/product
 https://api-desafio06escoladnc.vercel.app/product/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
 
@@ -388,7 +409,7 @@ Obs: lembre-se se subistituir o ":id" por um id valido
 https://api-desafio06escoladnc.vercel.app/product/edit/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
 É necessário passar esse objeto no body de requisição
@@ -420,10 +441,11 @@ exemplo:
 https://api-desafio06escoladnc.vercel.app/product/delete/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 
 &nbsp;
+<a id='inventory'></a>
 
 ### /inventory
 &nbsp;
@@ -454,7 +476,7 @@ https://api-desafio06escoladnc.vercel.app/inventory
 https://api-desafio06escoladnc.vercel.app/inventory/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
 
@@ -464,7 +486,7 @@ Obs: lembre-se se subistituir o ":id" por um id valido
 https://api-desafio06escoladnc.vercel.app/inventory/edit/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
 É necessário passar esse objeto no body de requisição
@@ -485,9 +507,10 @@ Obs: apenas a quantidade pode ser editada.
 https://api-desafio06escoladnc.vercel.app/inventory/delete/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
+<a id='sale'></a>
 
 ### /sale
 &nbsp;
@@ -519,7 +542,7 @@ https://api-desafio06escoladnc.vercel.app/sale
 https://api-desafio06escoladnc.vercel.app/sale/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
 
@@ -529,7 +552,7 @@ Obs: lembre-se se subistituir o ":id" por um id valido
 https://api-desafio06escoladnc.vercel.app/sale/edit/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
 É necessário passar esse objeto no body de requisição
@@ -558,9 +581,11 @@ exemplo:
 https://api-desafio06escoladnc.vercel.app/sale/delete/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
+<a id='order'></a>
+
 ### /order
 &nbsp;
 **POST** - para inserir um novo registro
@@ -592,7 +617,7 @@ https://api-desafio06escoladnc.vercel.app/order
 https://api-desafio06escoladnc.vercel.app/order/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
 
@@ -602,7 +627,7 @@ Obs: lembre-se se subistituir o ":id" por um id valido
 https://api-desafio06escoladnc.vercel.app/order/edit/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
 É necessário passar esse objeto no body de requisição
@@ -623,6 +648,6 @@ Obs: Apenas a quanitidade é permitida.
 https://api-desafio06escoladnc.vercel.app/order/delete/:id
 ```
 &nbsp;
-Obs: lembre-se se subistituir o ":id" por um id valido
+Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
