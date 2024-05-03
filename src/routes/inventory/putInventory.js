@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const schemaInventory = require('../../schemas/schemaInventory');
+const schemaProduct = require('../../schemas/schemaProduct');
 
 //REQUISIÇÃO HTTP
 router.put('/edit/:id', async (req, res) => {
@@ -16,6 +17,16 @@ router.put('/edit/:id', async (req, res) => {
         error: 'Inventory not found',
         message: `That inventory you're looking for doesn't exist in the database.`,
         code: 404
+      });
+    }
+
+    //VERIFICA SE O PRODUTO ESTA MORCADO COMO DELETADO, CASO ESTEJA RETORNA ERRO
+    const product = await schemaProduct.findByPk(inventory.FK_PRODUCT_ID);
+    if(product.PRODUCT_DELETED) {
+      return res.status(400).json({
+        error: 'Bad Request',
+        message: 'This product has been subject to soft deletion. Undo the deletion to register an order with it.',
+        code: 400
       });
     }
 
