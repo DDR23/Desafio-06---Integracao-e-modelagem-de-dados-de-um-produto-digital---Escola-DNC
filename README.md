@@ -7,7 +7,7 @@ Nesse README.dm é possivel encontrar informações sobre:
 - Banco de dados
 - Instalações
 - Funcionalidades
-- Exemplos de uso
+- Exemplos de uso + link da colletion no postman
 
 #### URL da API: https://api-desafio06escoladnc.vercel.app/
 
