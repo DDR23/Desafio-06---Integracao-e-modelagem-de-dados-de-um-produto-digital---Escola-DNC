@@ -31,17 +31,17 @@ router.put('/edit/:id', async (req, res) => {
         code: 404
       });
     }
-
-    //VERIFICA SE O PRODUTO EXISTE
+    
+    //VERIFICA SE O PRODUTO ESTA MORCADO COMO DELETADO, CASO ESTEJA RETORNA ERRO
     const product = await schemaProduct.findByPk(order.FK_PRODUCT_ID);
-    if (!product) {
+    if(product.PRODUCT_DELETED) {
       return res.status(400).json({
         error: 'Bad Request',
-        message: 'The product does not exist.',
+        message: 'This product has been subject to soft deletion. Undo the deletion to register an order with it.',
         code: 400
       });
     }
-
+    
     //VERIFICA SE O PRODUTO TEM A QUANTIDADE NECESSÁRIA DISPONÍVEL NO INVENTARIO 
     const inventory = await schemaInventory.findOne({ where: { FK_PRODUCT_ID: order.FK_PRODUCT_ID } });
     const sale = await schemaSale.findByPk(order.FK_SALE_ID);
