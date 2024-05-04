@@ -294,7 +294,7 @@ https://api-desafio06escoladnc.vercel.app
 https://api-desafio06escoladnc.vercel.app/client/create
 ```
 &nbsp;
-É necessário passar esse objeto no body de requisição
+É necessário passar esse objeto no body da requisição
 ```json
   {
     "CLIENT_USERNAME": STRING,
@@ -329,7 +329,7 @@ https://api-desafio06escoladnc.vercel.app/client/edit/:id
 Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
-É necessário passar esse objeto no body de requisição
+É necessário passar esse objeto no body da requisição
 ```json
   {
     "CLIENT_USERNAME": STRING,
@@ -370,7 +370,7 @@ Obs: lembre-se se subistituir o `:id` por um id valido
 https://api-desafio06escoladnc.vercel.app/product/create
 ```
 &nbsp;
-É necessário passar esse objeto no body de requisição
+É necessário passar esse objeto no body da requisição
 ```json
   {
     "PRODUCT_NAME": STRING,
@@ -407,7 +407,7 @@ https://api-desafio06escoladnc.vercel.app/product/edit/:id
 Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
-É necessário passar esse objeto no body de requisição
+É necessário passar esse objeto no body da requisição
 ```json
   {
     "PRODUCT_NAME": STRING,
@@ -449,7 +449,7 @@ Obs: lembre-se se subistituir o `:id` por um id valido
 https://api-desafio06escoladnc.vercel.app/inventory/create
 ```
 &nbsp;
-É necessário passar esse objeto no body de requisição
+É necessário passar esse objeto no body da requisição
 ```json
   {
     "INVENTORY_QUANTITY": INTEGER,
@@ -484,7 +484,7 @@ https://api-desafio06escoladnc.vercel.app/inventory/edit/:id
 Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
-É necessário passar esse objeto no body de requisição
+É necessário passar esse objeto no body da requisição
 ```json
   {
     "INVENTORY_QUANTITY": 1000
@@ -515,7 +515,7 @@ https://api-desafio06escoladnc.vercel.app/sale/create
 ```
 
 &nbsp;
-É necessário passar esse objeto no body de requisição
+É necessário passar esse objeto no body da requisição
 ```json
   {
     "SALE_PRICE": DECIMAL(8,2),
@@ -550,7 +550,7 @@ https://api-desafio06escoladnc.vercel.app/sale/edit/:id
 Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
-É necessário passar esse objeto no body de requisição
+É necessário passar esse objeto no body da requisição
 ```json
   {
     "SALE_PRICE": DECIMAL(8,2),
@@ -589,7 +589,7 @@ https://api-desafio06escoladnc.vercel.app/order/create
 ```
 
 &nbsp;
-É necessário passar esse objeto no body de requisição
+É necessário passar esse objeto no body da requisição
 ```json
   {
     "ORDER_QUANTITY": INTEGER,
@@ -625,7 +625,7 @@ https://api-desafio06escoladnc.vercel.app/order/edit/:id
 Obs: lembre-se se subistituir o `:id` por um id valido
 
 &nbsp;
-É necessário passar esse objeto no body de requisição
+É necessário passar esse objeto no body da requisição
 ```json
   {
     "ORDER_QUANTITY": INTEGER
