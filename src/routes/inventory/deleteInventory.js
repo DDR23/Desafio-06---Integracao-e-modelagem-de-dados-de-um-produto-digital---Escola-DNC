@@ -20,7 +20,7 @@ router.delete('/delete/:id', async (req, res) => {
     }
 
     //EXECUTA O DELETE
-    await inventory.destroy();
+    await inventory.update({ INVENTORY_QUANTITY: 0 });
 
     //RETORNA O RESULTADO
     res.status(200).json({
