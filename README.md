@@ -7,8 +7,8 @@ Nesse `README.dm` é possivel encontrar informações sobre:
 - [Tecnologias usadas](#tecnologias)
 - [Banco de dados](#banco)
 - [Instalações](#instalacoes)
-- [Funcionalidades](#funcionalidades)
 - [Colletion no postman](#collection)
+- [Funcionalidades](#funcionalidades)
 - [Exemplos de uso](#exemplos)
 
 #### URL da API: https://api-desafio06escoladnc.vercel.app/
@@ -228,6 +228,22 @@ DB_LOCAL_SCHEMA=desafio06-dnc
 ```
 
 &nbsp;
+<a id="collection"></a>
+
+## Collection no postman
+
+&nbsp;
+
+Link da coleção no postman
+```http
+https://www.postman.com/cryosat-explorer-99357718/workspace/escola-dnc/collection/30895958-276761f6-7116-4ec3-a8bf-2342f4f627f6?action=share&creator=30895958&active-environment=30895958-28b0b03e-551f-4191-a52d-affd65c1e244
+```
+Obs: Pode ser preciso definir o valor da variavel `{{URLbase}}` como:
+```http
+https://api-desafio06escoladnc.vercel.app
+```
+
+&nbsp;
 <a id="funcionalidades"></a>
 
 ## Funcionalidades
@@ -261,22 +277,6 @@ DB_LOCAL_SCHEMA=desafio06-dnc
 - `/order` ou `/order/:id` Visualiza todas ou uma ordem.
 - `/order/edit/:id` Edita apenas a quantidade, atualiza a tabela inventory adicionando ou subtraindo a quantidade e atualiza o valor final na tabela sale.
 - `/order/delete/:id` Deleta uma ordem, estorna a quantidade do produto para tabela inventory e atualiza o valor final na tabela sale. Caso o produto esteja marcado com soft delete, retira o soft delete.
-
-&nbsp;
-<a id="collection"></a>
-
-## Collection no postman
-
-&nbsp;
-
-Link da coleção no postman
-```http
-https://www.postman.com/cryosat-explorer-99357718/workspace/escola-dnc/collection/30895958-276761f6-7116-4ec3-a8bf-2342f4f627f6?action=share&creator=30895958&active-environment=30895958-28b0b03e-551f-4191-a52d-affd65c1e244
-```
-Obs: Pode ser preciso definir o valor da variavel `{{URLbase}}` como:
-```http
-https://api-desafio06escoladnc.vercel.app
-```
 
 &nbsp;
 <a id="exemplos"></a>
