@@ -19,7 +19,7 @@ router.delete('/delete/:id', async (req, res) => {
       });
     }
 
-    //EXECUTA O DELETE
+    //ZERA O INVENTARIO
     await inventory.update({ INVENTORY_QUANTITY: 0 });
 
     //RETORNA O RESULTADO

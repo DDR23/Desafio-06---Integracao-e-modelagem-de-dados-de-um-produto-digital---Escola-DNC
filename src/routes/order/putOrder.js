@@ -50,7 +50,7 @@ router.put('/edit/:id', async (req, res) => {
     if(inventory.INVENTORY_QUANTITY + oldQuantity < newQuantity) {
       return res.status(400).json({
         error: 'Bad Request',
-        message: 'The product quantity is not sufficient.',
+        message: 'This product does not have the required quantity available in the inventory.',
         code: 400
       });
     }

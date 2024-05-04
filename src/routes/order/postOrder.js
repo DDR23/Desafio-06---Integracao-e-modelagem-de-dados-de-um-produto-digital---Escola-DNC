@@ -65,7 +65,7 @@ router.post('/create', async (req, res) => {
     if(inventory.INVENTORY_QUANTITY < ORDER_QUANTITY) {
       return res.status(400).json({
         error: 'Bad Request',
-        message: 'The product quantity is not sufficient.',
+        message: 'This product does not have the required quantity available in the inventory.',
         code: 400
       });
     }
