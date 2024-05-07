@@ -14,7 +14,11 @@ router.get('', async (req, res) => {
 
   //RETORNA ERRO CASO A EXECUÇÃO ACIMA FALHE
   } catch (error) {
-    return res.status(500).sendFile(path.join(__dirname, '..', '..', 'public', 'error.html'));
+    res.status(500).json({
+      error: 'Internal server error',
+      message: `Oops! We've hit a snag. Our server is experiencing a momentary hiccup. We'll be back on track shortly!`,
+      code: 500
+    });
   }
 });
 
