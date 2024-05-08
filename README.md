@@ -220,11 +220,11 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 # DB_SCHEMA=
 
 # AMBIENTE DE TESTE
-DB_LOCAL_USER=root
-DB_LOCAL_PASSWORD=TeRYs3_FqhXxzTP
-DB_LOCAL_HOST=localhost
-DB_LOCAL_PORT=3306
-DB_LOCAL_SCHEMA=desafio06-dnc
+DB_LOCAL_USER=
+DB_LOCAL_PASSWORD=
+DB_LOCAL_HOST=
+DB_LOCAL_PORT=
+DB_LOCAL_SCHEMA=
 ```
 
 &nbsp;
