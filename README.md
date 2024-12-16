@@ -19,6 +19,7 @@ Obs: Essa api foi hospedada na Vercel, normalmente a vercel desliga o servidor d
 ---
 <a id="desenvolvimento"></a>
 
+# gerenciador-de-venda-e-estoque-backend
 # Desafio-06---Integracao-e-modelagem-de-dados-de-um-produto-digital---Escola-DNC
 
 🎯Etapas de Desenvolvimento
